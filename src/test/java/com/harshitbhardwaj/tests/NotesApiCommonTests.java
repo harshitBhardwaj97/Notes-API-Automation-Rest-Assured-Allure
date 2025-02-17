@@ -15,8 +15,6 @@ import static com.harshitbhardwaj.constants.Constants.Common.SUCCESS_HEALTH_MESS
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 
-@Listeners({com.harshitbhardwaj.listener.AllureTestLifeCycleListener.class,
-        com.harshitbhardwaj.listener.AnnotationTransformer.class})
 public class NotesApiCommonTests {
 
     private static final Logger logger = LoggerFactory.getLogger(NotesApiCommonTests.class);

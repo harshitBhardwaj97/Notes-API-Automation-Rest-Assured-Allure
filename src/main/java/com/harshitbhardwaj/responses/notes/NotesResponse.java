@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.harshitbhardwaj.constants.Constants;
 import com.harshitbhardwaj.models.NoteResponseAndInfo;
 import com.harshitbhardwaj.utils.Utils;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -16,11 +17,13 @@ public class NotesResponse {
     private final static Faker faker = new Faker();
 
     public static Response getAllNotesWithToken(String token) {
-        return RestAssured.given().header("x-auth-token", token).when().get(Constants.Common.getAllNotesOrPostNote);
+        return RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).when().get(Constants.Common.getAllNotesOrPostNote);
     }
 
     public static Response getNoteWithTokenAndById(String token, String noteId) {
-        return RestAssured.given().header("x-auth-token", token).pathParam("id", noteId).when()
+        return RestAssured.given().filter(new AllureRestAssured())
+                .header("x-auth-token", token).pathParam("id", noteId).when()
                 .get(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 
@@ -35,7 +38,8 @@ public class NotesResponse {
         notePayloadAndInfo.put("description", noteDescription);
         notePayloadAndInfo.put("category", noteType);
 
-        Response response = RestAssured.given().header("x-auth-token", token).contentType(ContentType.JSON).body(notePayloadAndInfo)
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).contentType(ContentType.JSON).body(notePayloadAndInfo)
                 .when().post(Constants.Common.getAllNotesOrPostNote).then().extract().response();
 
         String postedNoteId = response.path("data.id");
@@ -51,7 +55,8 @@ public class NotesResponse {
         Map<String, Object> notePatchInfo = new HashMap<>();
         notePatchInfo.put("completed", completedStatus);
 
-        Response response = RestAssured.given().header("x-auth-token", token).pathParam("id", noteId).contentType(ContentType.JSON)
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).pathParam("id", noteId).contentType(ContentType.JSON)
                 .body(notePatchInfo).when().patch(Constants.Common.createReadUpdateOrDeleteNoteById).then().extract()
                 .response();
 
@@ -80,7 +85,8 @@ public class NotesResponse {
         updatedNotePayloadInfo.put("category", updatedNoteTypeParam);
         updatedNotePayloadInfo.put("completed", Utils.getRandomNoteCompletion());
 
-        Response response = RestAssured.given().header("x-auth-token", token).pathParam("id", noteId).contentType(ContentType.JSON)
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).pathParam("id", noteId).contentType(ContentType.JSON)
                 .body(updatedNotePayloadInfo).when().put(Constants.Common.createReadUpdateOrDeleteNoteById).then()
                 .extract().response();
 
@@ -103,12 +109,15 @@ public class NotesResponse {
         String randomBody = faker.bothify("#?#?#?#?"); // Invalid Completed Parameter, it should be either true of false
         notePatchInfo.put("completed", randomBody);
 
-        return RestAssured.given().header("x-auth-token", token).pathParam("id", noteId).contentType(ContentType.JSON)
+        return RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).pathParam("id", noteId).contentType(ContentType.JSON)
                 .body(notePatchInfo).when().patch(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 
     public static Response deleteNoteWithTokenAndById(String token, String noteId) {
-        return RestAssured.given().header("x-auth-token", token).pathParam("id", noteId).when()
+        return RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).pathParam("id",
+                        noteId).when()
                 .delete(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 
@@ -127,17 +136,19 @@ public class NotesResponse {
         notePayload.put("description", noteDescription);
         notePayload.put("category", noteType);
 
-        Response response = RestAssured.given().contentType(ContentType.JSON).when().post(Constants.Common.getAllNotesOrPostNote);
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).when().post(Constants.Common.getAllNotesOrPostNote);
         return new NoteResponseAndInfo(response, notePayload);
     }
 
     public static Response postNoteWithoutAuthorizationAndPayload() {
-        return RestAssured.given().contentType(ContentType.JSON).when().post(Constants.Common.getAllNotesOrPostNote);
+        return RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).when().post(Constants.Common.getAllNotesOrPostNote);
     }
 
     public static Response getNoteWithoutAuthorization() {
         String randomId = Utils.generateRandomHexId(24);
-        return RestAssured.given().pathParam("id", randomId).when()
+        return RestAssured.given().filter(new AllureRestAssured()).pathParam("id", randomId).when()
                 .get(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 
@@ -157,7 +168,8 @@ public class NotesResponse {
 
         System.out.println("updatedNote -> " + updatedNotePayload);
 
-        return RestAssured.given().pathParam("id", randomId).contentType(ContentType.JSON).when()
+        return RestAssured.given().filter(new AllureRestAssured()).
+                pathParam("id", randomId).contentType(ContentType.JSON).when()
                 .put(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 
@@ -170,13 +182,14 @@ public class NotesResponse {
 
         System.out.println("patchedNote -> " + patchedNotePayload);
 
-        return RestAssured.given().pathParam("id", randomId).contentType(ContentType.JSON).when()
+        return RestAssured.given().filter(new AllureRestAssured()).
+                pathParam("id", randomId).contentType(ContentType.JSON).when()
                 .patch(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 
     public static Response deleteNoteWithoutAuthorization() {
         String randomId = Utils.generateRandomHexId(24);
-        return RestAssured.given().pathParam("id", randomId).when()
+        return RestAssured.given().filter(new AllureRestAssured()).pathParam("id", randomId).when()
                 .delete(Constants.Common.createReadUpdateOrDeleteNoteById);
     }
 

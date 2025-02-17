@@ -3,6 +3,7 @@ package com.harshitbhardwaj.responses.user;
 import com.github.javafaker.Faker;
 import com.harshitbhardwaj.constants.Constants;
 import com.harshitbhardwaj.models.UserResponseAndInfo;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -25,7 +26,8 @@ public class UserResponse {
         validUserPayload.put("email", validEmail);
         validUserPayload.put("password", password);
 
-        Response response = RestAssured.given().contentType(ContentType.JSON).body(validUserPayload).when()
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).body(validUserPayload).when()
                 .post(Constants.Common.registerUser);
         return new UserResponseAndInfo(response, validUserPayload);
     }
@@ -41,7 +43,8 @@ public class UserResponse {
         userPayloadWithInvalidEmail.put("email", invalidEmail);
         userPayloadWithInvalidEmail.put("password", password);
 
-        Response response = RestAssured.given().contentType(ContentType.JSON).body(userPayloadWithInvalidEmail).when()
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).body(userPayloadWithInvalidEmail).when()
                 .post(Constants.Common.registerUser);
         return new UserResponseAndInfo(response, userPayloadWithInvalidEmail);
     }
@@ -57,7 +60,8 @@ public class UserResponse {
         userPayloadWithInvalidPassword.put("email", validEmail);
         userPayloadWithInvalidPassword.put("password", invalidPassword);
 
-        Response response = RestAssured.given().contentType(ContentType.JSON).body(userPayloadWithInvalidPassword).when()
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).body(userPayloadWithInvalidPassword).when()
                 .post(Constants.Common.registerUser);
         return new UserResponseAndInfo(response, userPayloadWithInvalidPassword);
     }
@@ -68,7 +72,8 @@ public class UserResponse {
         userPayloadOrInfo.put("email", email);
         userPayloadOrInfo.put("password", password);
 
-        Response response = RestAssured.given().contentType(ContentType.JSON).body(userPayloadOrInfo).when()
+        Response response = RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).body(userPayloadOrInfo).when()
                 .post(Constants.Common.loginUser).then().extract().response();
 
         String token = response.path("data.token");
@@ -79,15 +84,18 @@ public class UserResponse {
     }
 
     public static Response logoutUserWithToken(String token) {
-        return RestAssured.given().header("x-auth-token", token).when().delete(Constants.Common.logoutUser);
+        return RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).when().delete(Constants.Common.logoutUser);
     }
 
     public static Response getUserProfileWithToken(String token) {
-        return RestAssured.given().header("x-auth-token", token).when().get(Constants.Common.userProfile);
+        return RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).when().get(Constants.Common.userProfile);
     }
 
     public static Response deleteUserWithToken(String token) {
-        return RestAssured.given().header("x-auth-token", token).when().delete(Constants.Common.deleteUser);
+        return RestAssured.given().filter(new AllureRestAssured()).
+                header("x-auth-token", token).when().delete(Constants.Common.deleteUser);
     }
 
     public static Response getUserProfileWithoutAuthorization() {
@@ -107,12 +115,13 @@ public class UserResponse {
         payload.put("currentPassword", "John");
         payload.put("newPassword", "Doe");
 
-        return RestAssured.given().contentType(ContentType.JSON).body(payload).when()
+        return RestAssured.given().filter(new AllureRestAssured()).contentType(ContentType.JSON).body(payload).when()
                 .post(Constants.Common.changeUserPassword);
     }
 
     public static Response changeUserPasswordWithoutAuthorizationAndPayload() {
-        return RestAssured.given().contentType(ContentType.JSON).when().post(Constants.Common.changeUserPassword);
+        return RestAssured.given().filter(new AllureRestAssured()).
+                contentType(ContentType.JSON).when().post(Constants.Common.changeUserPassword);
     }
 
 }

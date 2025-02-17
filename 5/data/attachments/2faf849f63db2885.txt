@@ -1,0 +1,1 @@
+Test logoutUserWithInvalidToken_returnsBadRequestStatus completed successfully.

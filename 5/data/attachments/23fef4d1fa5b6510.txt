@@ -1,0 +1,1 @@
+Test registeringUserWithInvalidPassword_returnsBadRequestStatus completed successfully.

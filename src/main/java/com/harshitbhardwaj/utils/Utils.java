@@ -3,10 +3,14 @@ package com.harshitbhardwaj.utils;
 import java.util.Random;
 import java.util.UUID;
 
-public class Utils {
+public final class Utils {
 
     private static final String[] NOTE_CATEGORIES = {"Home", "Work", "Personal"};
     private static final boolean[] NOTE_COMPLETION = {true, false};
+
+    private Utils() {
+        throw new AssertionError("Cannot instantiate Utils.class");
+    }
 
     public static String getRandomNoteCategory() {
         Random random = new Random();

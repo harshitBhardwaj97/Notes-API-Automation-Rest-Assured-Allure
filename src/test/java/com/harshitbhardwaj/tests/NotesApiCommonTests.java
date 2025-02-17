@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.harshitbhardwaj.constants.Constants.Common.SUCCESS_HEALTH_MESSAGE;

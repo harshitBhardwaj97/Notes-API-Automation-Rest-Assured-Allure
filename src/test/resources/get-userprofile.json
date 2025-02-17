@@ -1,0 +1,10 @@
+{
+	"success": true,
+	"status": 200,
+	"message": "Profile successful",
+	"data": {
+		"id": "65ed966655382801413da08f",
+		"name": "Alex Mueller",
+		"email": "peter.rowe@hotmail.com"
+	}
+}

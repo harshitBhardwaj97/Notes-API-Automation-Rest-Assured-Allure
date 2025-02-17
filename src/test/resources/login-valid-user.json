@@ -1,0 +1,11 @@
+{
+	"success": true,
+	"status": 200,
+	"message": "Login successful",
+	"data": {
+		"id": "65ed8bb555382801413da04d",
+		"name": "Miss Felix Gislason",
+		"email": "dean.renner@hotmail.com",
+		"token": "89d9862179644254bc74ae1a38ea9ba2d4ead4737ad24940aecd0227d03ec540"
+	}
+}

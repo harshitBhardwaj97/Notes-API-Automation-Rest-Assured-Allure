@@ -1,0 +1,10 @@
+{
+	"success": true,
+	"status": 201,
+	"message": "User account created successfully",
+	"data": {
+		"id": "65ed87c555382801413da037",
+		"name": "Miss Jimmie Koelpin",
+		"email": "kurtis.rutherford@gmail.com"
+	}
+}

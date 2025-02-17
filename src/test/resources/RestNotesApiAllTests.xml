@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="NotesApiTestSuite" parallel="tests">
+    <listeners>
+        <listener class-name="com.harshitbhardwaj.listener.AllureTestLifeCycleListener"/>
+        <listener class-name="com.harshitbhardwaj.listener.AnnotationTransformer"/>
+    </listeners>
+    <test name="NotesApiCommonTests">
+        <classes>
+            <class name="com.harshitbhardwaj.tests.NotesApiCommonTests"/>
+        </classes>
+    </test>
+    <test name="NotesApiUnauthorizedUserNotesTests">
+        <classes>
+            <class name="com.harshitbhardwaj.tests.NotesApiUnauthorizedUserNotesTests"/>
+        </classes>
+    </test>
+    <test name="NotesApiUnauthorizedUserTests">
+        <classes>
+            <class name="com.harshitbhardwaj.tests.NotesApiUnauthorizedUserTests"/>
+        </classes>
+    </test>
+    <test name="NotesApiUserNotesTests">
+        <classes>
+            <class name="com.harshitbhardwaj.tests.NotesApiUserNotesTests"/>
+        </classes>
+    </test>
+    <test name="NotesApiUserTests">
+        <classes>
+            <class name="com.harshitbhardwaj.tests.NotesApiUserTests"/>
+        </classes>
+    </test>
+</suite>

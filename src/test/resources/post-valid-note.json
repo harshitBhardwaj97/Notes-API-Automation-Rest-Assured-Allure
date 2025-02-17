@@ -1,0 +1,15 @@
+{
+	"success": true,
+	"status": 200,
+	"message": "Note successfully created",
+	"data": {
+		"id": "65edfc2455382801413da24d",
+		"title": "Note",
+		"description": "Description",
+		"category": "Home",
+		"completed": false,
+		"created_at": "2024-03-10T18:29:56.940Z",
+		"updated_at": "2024-03-10T18:29:56.940Z",
+		"user_id": "65edfaa255382801413da242"
+	}
+}

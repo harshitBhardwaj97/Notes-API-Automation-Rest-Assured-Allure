@@ -1,0 +1,1 @@
+Test logoutUserWithValidToken_returnsSuccessStatus completed successfully.

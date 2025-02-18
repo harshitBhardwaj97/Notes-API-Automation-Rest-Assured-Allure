@@ -122,7 +122,7 @@ public class NotesResponse {
     }
 
     public static Response getAllNotesWithoutAuthorization() {
-        return RestAssured.when().get(Constants.Common.getAllNotesOrPostNote);
+        return RestAssured.given().filter(new AllureRestAssured()).when().get(Constants.Common.getAllNotesOrPostNote);
     }
 
     public static NoteResponseAndInfo postNoteWithoutAuthorization() {

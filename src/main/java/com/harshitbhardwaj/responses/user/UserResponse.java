@@ -99,15 +99,15 @@ public class UserResponse {
     }
 
     public static Response getUserProfileWithoutAuthorization() {
-        return RestAssured.when().get(Constants.Common.userProfile);
+        return RestAssured.given().filter(new AllureRestAssured()).when().get(Constants.Common.userProfile);
     }
 
     public static Response logoutUserWithoutAuthorization() {
-        return RestAssured.when().delete(Constants.Common.logoutUser);
+        return RestAssured.given().filter(new AllureRestAssured()).when().delete(Constants.Common.logoutUser);
     }
 
     public static Response deleteUserAccountWithoutAuthorization() {
-        return RestAssured.when().delete(Constants.Common.deleteUser);
+        return RestAssured.given().filter(new AllureRestAssured()).when().delete(Constants.Common.deleteUser);
     }
 
     public static Response changeUserPasswordWithoutAuthorization() {

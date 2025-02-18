@@ -1,0 +1,1 @@
+Test registeringUserWithInvalidEmail_returnsBadRequestStatus completed successfully.

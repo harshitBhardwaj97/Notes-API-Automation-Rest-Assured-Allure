@@ -1,0 +1,1 @@
+Test patchNote_withoutAuthorization_returnsUnauthorizedRequestStatus completed successfully.

@@ -1,0 +1,1 @@
+Test changeUserPassword_withoutAuthorizationAndPayload__returnsUnauthorizedRequestStatus started.

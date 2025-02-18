@@ -1,0 +1,1 @@
+Test loggingUserWithInvalidCredentials_returnsBadRequestStatus started.

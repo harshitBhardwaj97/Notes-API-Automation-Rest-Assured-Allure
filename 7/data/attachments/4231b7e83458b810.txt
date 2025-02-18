@@ -1,0 +1,1 @@
+Test getAllNotes_withoutAuthorization_returnsUnauthorizedRequestStatus completed successfully.
